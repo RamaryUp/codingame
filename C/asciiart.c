@@ -86,14 +86,20 @@ Output
 int main()
 {
     int L;
-    scanf("%d", &L);
     int H;
-    scanf("%d", &H); fgetc(stdin);
     const int IDX_QUESTION_MARK = 26;
-    char text[257];
+    const int MAX_INPUT_LEN = 200;
+    
+    // input Letter width and height
+    scanf("%d", &L);
+    scanf("%d", &H); fgetc(stdin);
+
+    char text[ MAX_INPUT_LEN];
     gets(text);
     int len = strlen(text);
     char dict[H][L * 27];   // 26 letters + question mark
+    
+    // Storing the ASCII ART characters definitions
     for (int i = 0; i < H; i++) {
         char ROW[1025];
         fgets(ROW, 1025, stdin);
@@ -102,6 +108,7 @@ int main()
         }
     }
 
+    // Displaying ASCII ART for text
     for (int i = 0; i < H; i++) {
         char line[L*len+1];
         line[L*len] = '\0';

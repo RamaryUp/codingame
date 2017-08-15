@@ -3,27 +3,44 @@
 # Category : Classic puzzle - medium level
 # URL : https://www.codingame.com/training/medium/the-last-crusade-episode-1
 # Selected programming language : Python 3.5.3
+'''
+-----------------------------------------------------------------------------------
+	The Goal
 
-import sys
+Your objective is to write a program capable of predicting the route Indy will take on his way down a tunnel. Indy is not in danger of getting trapped in this first mission.
+ 	Rules
 
-# TOP means From TOP, LEFT means from LEFT, RIGHT means from RIGHT
-# (0,1) means go down, (1,0) means go right, (-1, 0) means go left
+The tunnel consists of a patchwork of square rooms of different types.The rooms can be accessed and activated by computer using an ancient RS232 serial port (because Mayans
+aren't very technologically advanced, as is to be expected...).
+
+There is a total of 14 room types (6 base shapes extended to 14 through rotations).
+
+[See the complete rules on Codingame]
+-----------------------------------------------------------------------------------
+'''
+# Where do I come from
+FROMTOP, FROMLEFT, FROMRIGHT ='TOP', 'LEFT', 'RIGHT'
+
+# Where do I go
+GODOWN, GOLEFT, GORIGHT = (0,1), (-1,0), (1,0)
+
+DONTMOVE=(0,0)
 
 directions={}
-directions[0] = {'TOP':(0,0),'LEFT':(0,0),'RIGHT':(0,0) }
-directions[1] = {'TOP':(0,1),'LEFT':(0,1),'RIGHT':(0,1) } # From Left : Go to right, From Right : go to left
-directions[2] = {'TOP':(0,0),'LEFT':(1,0),'RIGHT':(-1,0) } # From Left : Go to right, From Right : Go to left
-directions[3] = {'TOP':(0,1),'LEFT':(0,0),'RIGHT':(0,0) }
-directions[4] = {'TOP':(-1,0),'LEFT':(0,0),'RIGHT':(0,1) }
-directions[5] = {'TOP':(1,0),'LEFT':(0,1),'RIGHT':(0,0) }
-directions[6] = {'TOP':(0,0),'LEFT':(1,0),'RIGHT':(-1,0) }
-directions[7] = {'TOP':(0,1),'LEFT':(0,0),'RIGHT':(0,1) }
-directions[8] = {'TOP':(0,0),'LEFT':(0,1),'RIGHT':(0,1) }
-directions[9] = {'TOP':(0,1),'LEFT':(0,1),'RIGHT':(0,0) }
-directions[10] = {'TOP':(-1,0),'LEFT':(0,0),'RIGHT':(0,0) }
-directions[11] = {'TOP':(1,0),'LEFT':(0,0),'RIGHT':(0,0) }
-directions[12] = {'TOP':(0,0),'LEFT':(0,0),'RIGHT':(0,1) }
-directions[13] = {'TOP':(0,0),'LEFT':(0,1),'RIGHT':(0,1) }
+directions[0] = {FROMTOP:DONTMOVE,FROMLEFT:DONTMOVE,FROMRIGHT:DONTMOVE }
+directions[1] = {FROMTOP:GODOWN,FROMLEFT:GODOWN,FROMRIGHT:GODOWN } # From top : Go down, From Left : Go down, From Right : Go down
+directions[2] = {FROMTOP:DONTMOVE,FROMLEFT:GORIGHT,FROMRIGHT:GOLEFT } # From Top : Can't move, From Left : Go to right, From Right : Go to left
+directions[3] = {FROMTOP:GODOWN,FROMLEFT:DONTMOVE,FROMRIGHT:DONTMOVE }
+directions[4] = {FROMTOP:GOLEFT,FROMLEFT:DONTMOVE,FROMRIGHT:GODOWN }
+directions[5] = {FROMTOP:GORIGHT,FROMLEFT:GODOWN,FROMRIGHT:DONTMOVE }
+directions[6] = {FROMTOP:DONTMOVE,FROMLEFT:GORIGHT,FROMRIGHT:GOLEFT }
+directions[7] = {FROMTOP:GODOWN,FROMLEFT:DONTMOVE,FROMRIGHT:GODOWN }
+directions[8] = {FROMTOP:DONTMOVE,FROMLEFT:GODOWN,FROMRIGHT:GODOWN }
+directions[9] = {FROMTOP:GODOWN,FROMLEFT:GODOWN,FROMRIGHT:DONTMOVE }
+directions[10] = {FROMTOP:GOLEFT,FROMLEFT:DONTMOVE,FROMRIGHT:DONTMOVE }
+directions[11] = {FROMTOP:GORIGHT,FROMLEFT:DONTMOVE,FROMRIGHT:DONTMOVE }
+directions[12] = {FROMTOP:DONTMOVE,FROMLEFT:DONTMOVE,FROMRIGHT:GODOWN }
+directions[13] = {FROMTOP:DONTMOVE,FROMLEFT:GODOWN,FROMRIGHT:GODOWN }
 
 tunnel=[]
 
